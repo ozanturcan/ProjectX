@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "295935530223",
+    "firebase_url": "https://loodos-84cc9.firebaseio.com",
+    "project_id": "loodos-84cc9",
+    "storage_bucket": "loodos-84cc9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295935530223:android:abc8cb18ec1b96d700b71a",
+        "android_client_info": {
+          "package_name": "co.icanteach.projectx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295935530223-ipfgafqe5khkj1lkbm220rep4icfr292.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.icanteach.projectx",
+            "certificate_hash": "59ebca2d627570359294f39d3a7dff1ad3b9e1e6"
+          }
+        },
+        {
+          "client_id": "295935530223-6g763ipm45i8a3solk0qf1ml4co904au.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTMlNSYaCPK643aJkNdQuqH3SRX14jF3w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295935530223-6g763ipm45i8a3solk0qf1ml4co904au.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
