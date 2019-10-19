@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorCompat
+import androidx.core.view.ViewPropertyAnimatorListener
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -83,14 +84,26 @@ class SplashActivity : AppCompatActivity() {
                 .setDuration(ANIM_ITEM_DURATION.toLong()).setInterpolator(
                     DecelerateInterpolator(1.2f)
                 )
-            viewAnimator.setInterpolator(DecelerateInterpolator()).start()
+            viewAnimator.setInterpolator(DecelerateInterpolator())
+                .setListener(object : ViewPropertyAnimatorListener {
+                    override fun onAnimationEnd(view: View?) {
+                        this@SplashActivity.moveForward()
+                    }
+
+                    override fun onAnimationCancel(view: View?) {
+                    }
+
+                    override fun onAnimationStart(view: View?) {
+                    }
+
+                }).start()
         }
     }
 
     companion object {
         const val STARTUP_DELAY = 300
-        const val ANIM_ITEM_DURATION = 1000
-        private const val TIMEOUT_FOR_FETCHING_REMOTE_CONFIG_PARAMS_IN_MILLISECONDS = 5000L
+        const val ANIM_ITEM_DURATION = 3000
+        private const val TIMEOUT_FOR_FETCHING_REMOTE_CONFIG_PARAMS_IN_MILLISECONDS = 2500L
     }
 
     private fun moveForward() {
