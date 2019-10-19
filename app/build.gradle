@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 def configuration = rootProject.ext.configuration
 def libraries = rootProject.ext.libraries
@@ -15,6 +16,7 @@ android {
         targetSdkVersion configuration.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -49,7 +51,8 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-compiler:${libraries.lifecycleVersion}"
 
     implementation "com.google.android.material:material:${libraries.materialVersion}"
-
+    // Firebase
+    implementation "com.google.firebase:firebase-config:${libraries.firebaseVersion}"
 
     // Retrofit & Gson.
     implementation "com.squareup.retrofit2:retrofit:${libraries.retrofitVersion}"
