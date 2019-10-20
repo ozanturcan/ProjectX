@@ -5,11 +5,11 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class PopularTvShowActivityModule {
+class SearchMovieActivityModule {
 
     @Provides
     @ActivityScope
-    fun providePopularTVShowsFeedAdapter(): PopularTVShowsFeedAdapter {
-        return PopularTVShowsFeedAdapter()
+    fun provideSearchMoviesFeedAdapter(): SearchMovieFeedAdapter {
+        return SearchMovieFeedAdapter()
     }
 }

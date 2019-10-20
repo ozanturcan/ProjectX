@@ -2,18 +2,18 @@ package co.icanteach.projectx.domain
 
 import co.icanteach.projectx.common.Resource
 import co.icanteach.projectx.data.feed.MoviesRepository
-import co.icanteach.projectx.ui.populartvshows.model.PopularTvShowItem
+import co.icanteach.projectx.ui.populartvshows.model.SearchMovieItem
 import io.reactivex.Observable
 import javax.inject.Inject
 
 class FetchPopularTvShowUseCase @Inject constructor(
     private val repository: MoviesRepository,
-    private val mapper: PopularTvShowMapper
+    private val mapper: SearchMovieMapper
 ) {
 
-    fun fetchMovies(page: Int): Observable<Resource<List<PopularTvShowItem>>> {
+    fun fetchMovies(search: String, page: Int): Observable<Resource<List<SearchMovieItem>>> {
         return repository
-            .fetchMovies(page)
+            .fetchMovies(search, page)
             .map { resource ->
                 Resource(
                     status = resource.status,

@@ -1,13 +1,12 @@
 package co.icanteach.projectx.ui.populartvshows
 
 import co.icanteach.projectx.common.Status
-import co.icanteach.projectx.data.feed.response.PopularTVShowsResponse
-import co.icanteach.projectx.ui.populartvshows.model.PopularTvShowItem
+import co.icanteach.projectx.ui.populartvshows.model.SearchMovieItem
 
-class PopularTVShowsFeedViewState(
+class SearchMovieFeedViewState(
     val status: Status,
     val error: Throwable? = null,
-    val data: List<PopularTvShowItem>? = null
+    val data: List<SearchMovieItem>? = null
 ) {
     fun getPopularTvShows() = data ?: mutableListOf()
 

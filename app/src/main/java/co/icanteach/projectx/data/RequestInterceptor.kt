@@ -21,7 +21,7 @@ class RequestInterceptor @Inject constructor() : Interceptor {
     }
 
     companion object {
-        const val API_KEY_QUERY = "api_key"
-        const val API_KEY_VALUE = "5d967c7c335764f39b1efbe9c5de9760"
+        const val API_KEY_QUERY = "apikey"
+        const val API_KEY_VALUE = "a58c3d24 "
     }
 }

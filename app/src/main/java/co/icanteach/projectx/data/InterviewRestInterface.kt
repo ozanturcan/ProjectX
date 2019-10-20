@@ -1,12 +1,12 @@
 package co.icanteach.projectx.data
 
-import co.icanteach.projectx.data.feed.response.PopularTVShowsResponse
+import co.icanteach.projectx.data.feed.response.SearchMoviesResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface InterviewRestInterface {
 
-    @GET("tv/popular")
-    fun fetchMovies(@Query("page") page: Int): Observable<PopularTVShowsResponse>
+    @GET(".")
+    fun fetchMovies(@Query("s") search: String, @Query("page") page: Int): Observable<SearchMoviesResponse>
 }

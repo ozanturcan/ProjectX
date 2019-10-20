@@ -1,7 +1,7 @@
 package co.icanteach.projectx
 
-import co.icanteach.projectx.ui.populartvshows.PopularTVShowsFeedItemViewState
-import co.icanteach.projectx.ui.populartvshows.model.PopularTvShowItem
+import co.icanteach.projectx.ui.populartvshows.SearchMoviesFeedItemViewState
+import co.icanteach.projectx.ui.populartvshows.model.SearchMovieItem
 import com.google.common.truth.Truth
 import org.junit.Test
 
@@ -12,10 +12,10 @@ class PopularTVShowsFeedItemViewStateTest {
 
         // Given
         val tvShow = createDummyTvShow()
-        val givenViewState = PopularTVShowsFeedItemViewState(tvShow)
+        val givenViewState = SearchMoviesFeedItemViewState(tvShow)
 
         // When
-        val actualResult = givenViewState.getTvShowName()
+        val actualResult = givenViewState.getMovieName()
 
         // Then
         Truth.assertThat(actualResult).isEqualTo("Chernobyl")
@@ -26,7 +26,7 @@ class PopularTVShowsFeedItemViewStateTest {
 
         // Given
         val tvShow = createDummyTvShow()
-        val givenViewState = PopularTVShowsFeedItemViewState(tvShow)
+        val givenViewState = SearchMoviesFeedItemViewState(tvShow)
 
         // When
         val actualResult = givenViewState.getImageUrl()
@@ -40,20 +40,21 @@ class PopularTVShowsFeedItemViewStateTest {
 
         // Given
         val tvShow = createDummyTvShow()
-        val givenViewState = PopularTVShowsFeedItemViewState(tvShow)
+        val givenViewState = SearchMoviesFeedItemViewState(tvShow)
 
         // When
-        val actualResult = givenViewState.getTvShowOverview()
+        val actualResult = givenViewState.getMovieOverview()
 
         // Then
         Truth.assertThat(actualResult).isEqualTo("An unassuming mystery writer turned sleuth uses her professional insight to help solve real-life homicide cases.")
     }
 
-    private fun createDummyTvShow(): PopularTvShowItem {
-        return PopularTvShowItem(
-            name = "Chernobyl",
+    private fun createDummyTvShow(): SearchMovieItem {
+        return SearchMovieItem(
+            title = "Chernobyl",
             imageUrl = "/hlLXt2tOPT6RRnjiUmoxyG1LTFi.jpg",
-            overview = "An unassuming mystery writer turned sleuth uses her professional insight to help solve real-life homicide cases."
+            releaseYear = "An unassuming mystery writer turned sleuth uses her professional insight to help solve real-life homicide cases.",
+            imdbID = "2019"
         )
     }
 }

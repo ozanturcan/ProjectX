@@ -1,10 +1,12 @@
 package co.icanteach.projectx
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -14,9 +16,9 @@ import co.icanteach.projectx.common.ui.observeNonNull
 import co.icanteach.projectx.common.ui.runIfNull
 import co.icanteach.projectx.common.ui.withOutEmptyChar
 import co.icanteach.projectx.databinding.ActivityMainBinding
-import co.icanteach.projectx.ui.populartvshows.PopularTVShowsFeedAdapter
-import co.icanteach.projectx.ui.populartvshows.PopularTVShowsFeedViewState
 import co.icanteach.projectx.ui.populartvshows.PopularTVShowsViewModel
+import co.icanteach.projectx.ui.populartvshows.SearchMovieFeedAdapter
+import co.icanteach.projectx.ui.populartvshows.SearchMovieFeedViewState
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
@@ -28,13 +30,14 @@ import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 
+
 class MainActivity : AppCompatActivity() {
 
     @Inject
     internal lateinit var viewModelProviderFactory: ViewModelProvider.Factory
 
     @Inject
-    internal lateinit var tvShowsFeedAdapter: PopularTVShowsFeedAdapter
+    internal lateinit var tvShowsFeedAdapter: SearchMovieFeedAdapter
 
     private lateinit var moviesViewModel: PopularTVShowsViewModel
     private lateinit var binding: ActivityMainBinding
@@ -42,7 +45,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         moviesViewModel =
@@ -53,12 +55,33 @@ class MainActivity : AppCompatActivity() {
         }
 
         savedInstanceState.runIfNull {
-            fetchMovies(FIRST_PAGE)
+            fetchMovies("empty", FIRST_PAGE)
         }
         initPopularTVShowsRecyclerView()
         initMaterialDialog()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+
+        val mSearch = menu.findItem(R.id.action_search)
+
+        val mSearchView = mSearch.actionView as SearchView
+        mSearchView.queryHint = resources.getString(R.string.menu_search)
+
+        mSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                fetchMovies(query, FIRST_PAGE)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return true
+            }
+        })
+
+        return super.onCreateOptionsMenu(menu)
+    }
     private fun initPopularTVShowsRecyclerView() {
         val linearLayoutManager = LinearLayoutManager(this)
         binding.recyclerView.apply {
@@ -66,13 +89,13 @@ class MainActivity : AppCompatActivity() {
             layoutManager = linearLayoutManager
             addOnScrollListener(object : EndlessScrollListener(linearLayoutManager) {
                 override fun onLoadMore(page: Int) {
-                    fetchMovies(page)
+                    fetchMovies("empty", page)
                 }
             })
         }
     }
 
-    private fun renderPopularTVShows(feedViewState: PopularTVShowsFeedViewState) {
+    private fun renderPopularTVShows(feedViewState: SearchMovieFeedViewState) {
         with(binding) {
             viewState = feedViewState
             executePendingBindings()
@@ -80,8 +103,8 @@ class MainActivity : AppCompatActivity() {
         tvShowsFeedAdapter.setTvShows(feedViewState.getPopularTvShows())
     }
 
-    private fun fetchMovies(page: Int) {
-        moviesViewModel.fetchMovies(page)
+    private fun fetchMovies(search: String, page: Int) {
+        moviesViewModel.fetchMovies(search, page)
     }
 
     companion object {

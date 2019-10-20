@@ -7,9 +7,9 @@ import co.icanteach.projectx.common.Resource
 import co.icanteach.projectx.common.Status
 import co.icanteach.projectx.common.ui.applyLoading
 import co.icanteach.projectx.domain.FetchPopularTvShowUseCase
-import co.icanteach.projectx.ui.populartvshows.PopularTVShowsFeedViewState
 import co.icanteach.projectx.ui.populartvshows.PopularTVShowsViewModel
-import co.icanteach.projectx.ui.populartvshows.model.PopularTvShowItem
+import co.icanteach.projectx.ui.populartvshows.SearchMovieFeedViewState
+import co.icanteach.projectx.ui.populartvshows.model.SearchMovieItem
 import com.google.common.truth.Truth
 import io.mockk.MockKAnnotations
 import io.mockk.every
@@ -58,7 +58,7 @@ class PopularTVShowsViewModelTest {
         popularTVShowsViewModel.fetchMovies(1)
 
         // Then
-        val popularTVShowsFeedViewStateSlots = mutableListOf<PopularTVShowsFeedViewState>()
+        val popularTVShowsFeedViewStateSlots = mutableListOf<SearchMovieFeedViewState>()
         verify { mockedObserver.onChanged(capture(popularTVShowsFeedViewStateSlots)) }
 
         val errorState = popularTVShowsFeedViewStateSlots[0]
@@ -82,7 +82,7 @@ class PopularTVShowsViewModelTest {
         popularTVShowsViewModel.fetchMovies(1)
 
         // Then
-        val popularTVShowsFeedViewStateSlots = mutableListOf<PopularTVShowsFeedViewState>()
+        val popularTVShowsFeedViewStateSlots = mutableListOf<SearchMovieFeedViewState>()
         verify(exactly = 2) { mockedObserver.onChanged(capture(popularTVShowsFeedViewStateSlots)) }
 
         val errorState = popularTVShowsFeedViewStateSlots[1]
@@ -99,14 +99,14 @@ class PopularTVShowsViewModelTest {
             .observeForever(mockedObserver)
 
         every { fetchPopularTvShowUseCase.fetchMovies(any()) } returns
-                Observable.just(Resource.error<List<PopularTvShowItem>>(Exception("unhandled exception")))
+                Observable.just(Resource.error<List<SearchMovieItem>>(Exception("unhandled exception")))
                     .compose(applyLoading())
 
         // When
         popularTVShowsViewModel.fetchMovies(1)
 
         // Then
-        val popularTVShowsFeedViewStateSlots = mutableListOf<PopularTVShowsFeedViewState>()
+        val popularTVShowsFeedViewStateSlots = mutableListOf<SearchMovieFeedViewState>()
         verify(exactly = 2) { mockedObserver.onChanged(capture(popularTVShowsFeedViewStateSlots)) }
 
         val errorState = popularTVShowsFeedViewStateSlots[1]
@@ -115,18 +115,19 @@ class PopularTVShowsViewModelTest {
         verify { fetchPopularTvShowUseCase.fetchMovies(any()) }
     }
 
-    private fun createPopularTVShowsFeedObserver(): Observer<PopularTVShowsFeedViewState> = spyk(Observer { })
+    private fun createPopularTVShowsFeedObserver(): Observer<SearchMovieFeedViewState> =
+        spyk(Observer { })
 
-    private fun createDummyTvShow(): PopularTvShowItem {
-        return PopularTvShowItem(
-            name = "Chernobyl",
+    private fun createDummyTvShow(): SearchMovieItem {
+        return SearchMovieItem(
+            title = "Chernobyl",
             imageUrl = "/hlLXt2tOPT6RRnjiUmoxyG1LTFi.jpg",
-            overview = "An unassuming mystery writer turned sleuth uses her professional insight to help solve real-life homicide cases."
+            releaseYear = "An unassuming mystery writer turned sleuth uses her professional insight to help solve real-life homicide cases."
         )
     }
 
-    private fun createPopularTVShows(): List<PopularTvShowItem> {
-        val popularTvShows = mutableListOf<PopularTvShowItem>()
+    private fun createPopularTVShows(): List<SearchMovieItem> {
+        val popularTvShows = mutableListOf<SearchMovieItem>()
         for (x in 0..10) {
             popularTvShows.add(createDummyTvShow())
         }

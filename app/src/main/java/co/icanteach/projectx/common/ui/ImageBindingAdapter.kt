@@ -11,7 +11,7 @@ object ImageBindingAdapter {
     @BindingAdapter("imageUrl")
     fun setUrl(imageView: ImageView, imageUrl: String?) {
         Glide.with(imageView.context)
-            .load("https://image.tmdb.org/t/p/w500/$imageUrl")
+            .load(imageUrl)
             .into(imageView)
     }
 
