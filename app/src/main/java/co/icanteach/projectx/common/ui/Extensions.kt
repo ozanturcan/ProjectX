@@ -42,3 +42,7 @@ operator fun CompositeDisposable.plusAssign(disposable: Disposable) {
 fun Any?.runIfNull(block: () -> Unit) {
     if (this == null) block()
 }
+
+fun String.withOutEmptyChar(): String {
+    return replace(" ", "")
+}

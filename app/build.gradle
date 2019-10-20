@@ -71,6 +71,11 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:${libraries.glideVersion}"
     kapt "com.github.bumptech.glide:compiler:${libraries.glideVersion}"
 
+    /// afollestad material-dialogs
+    implementation "com.afollestad.material-dialogs:bottomsheets:${libraries.materialDialogs}"
+    implementation "com.afollestad.material-dialogs:core:${libraries.materialDialogs}"
+    implementation "com.afollestad.material-dialogs:lifecycle:${libraries.materialDialogs}"
+
     // Testing
     testImplementation "junit:junit:${libraries.junitVersion}"
     androidTestImplementation "androidx.test:runner:${libraries.androidxTestRunnerVersion}"

@@ -101,8 +101,8 @@ class SplashActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val STARTUP_DELAY = 300
-        const val ANIM_ITEM_DURATION = 3000
+        const val STARTUP_DELAY = 0
+        const val ANIM_ITEM_DURATION = 250
         private const val TIMEOUT_FOR_FETCHING_REMOTE_CONFIG_PARAMS_IN_MILLISECONDS = 2500L
     }
 

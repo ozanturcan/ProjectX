@@ -30,7 +30,8 @@ buildscript {
                 orchestratorVersion      : "1.1.1",
                 coreTestingVersion       : '2.0.0',
                 materialVersion          : "1.1.0-beta01",
-                firebaseVersion          : "19.0.3"
+                firebaseVersion          : "19.0.3",
+                materialDialogs          : "3.1.1"
         ]
 
         versionMajor = 1
