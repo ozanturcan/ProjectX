@@ -8,7 +8,7 @@
     android:background="@color/colorAccent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".SplashActivity">
+    tools:context=".ui.SplashActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgLogo"

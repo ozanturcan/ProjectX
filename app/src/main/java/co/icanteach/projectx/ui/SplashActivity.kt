@@ -1,4 +1,4 @@
-package co.icanteach.projectx
+package co.icanteach.projectx.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorCompat
 import androidx.core.view.ViewPropertyAnimatorListener
+import co.icanteach.projectx.R
+import co.icanteach.projectx.RemoteConfigUtil
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -1,4 +1,4 @@
-package co.icanteach.projectx
+package co.icanteach.projectx.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import co.icanteach.projectx.R
 import co.icanteach.projectx.common.ui.EndlessScrollListener
 import co.icanteach.projectx.common.ui.observeNonNull
 import co.icanteach.projectx.common.ui.withOutEmptyChar
