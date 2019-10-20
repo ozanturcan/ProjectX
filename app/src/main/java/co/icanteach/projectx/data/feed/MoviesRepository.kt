@@ -13,7 +13,13 @@ class MoviesRepository @Inject constructor(private val moviesRemoteDataSource: M
     fun fetchMovies(search: String, page: Int): Observable<Resource<SearchMoviesResponse>> =
         moviesRemoteDataSource
             .fetchMovies(search, page)
-            .map { Resource.success(it) }
+            .map {
+                if (it.response) {
+                    Resource.success(it)
+                } else {
+                    Resource.error(Throwable(it.error))
+                }
+            }
             .onErrorReturn { Resource.error(it) }
             .subscribeOn(Schedulers.io())
             .compose(applyLoading())

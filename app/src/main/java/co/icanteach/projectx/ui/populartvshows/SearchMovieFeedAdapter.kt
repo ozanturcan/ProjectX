@@ -35,6 +35,11 @@ class SearchMovieFeedAdapter @Inject constructor() :
         notifyItemRangeInserted(beforeSize, tvShows.size)
     }
 
+    fun clearTvShows() {
+        searchMovies.clear()
+        notifyDataSetChanged()
+    }
+
     inner class SearchMoviesFeedItemViewHolder(private val binding: ItemPopularTvShowsFeedBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

@@ -6,7 +6,7 @@ import co.icanteach.RxImmediateSchedulerRule
 import co.icanteach.projectx.common.Resource
 import co.icanteach.projectx.common.Status
 import co.icanteach.projectx.common.ui.applyLoading
-import co.icanteach.projectx.domain.FetchPopularTvShowUseCase
+import co.icanteach.projectx.domain.FetchSearchMoviesUseCase
 import co.icanteach.projectx.ui.populartvshows.PopularTVShowsViewModel
 import co.icanteach.projectx.ui.populartvshows.SearchMovieFeedViewState
 import co.icanteach.projectx.ui.populartvshows.model.SearchMovieItem
@@ -24,7 +24,7 @@ import org.junit.Test
 class PopularTVShowsViewModelTest {
 
     @MockK
-    lateinit var fetchPopularTvShowUseCase: FetchPopularTvShowUseCase
+    lateinit var fetchPopularTvShowUseCase: FetchSearchMoviesUseCase
 
     @Rule
     @JvmField
@@ -47,7 +47,7 @@ class PopularTVShowsViewModelTest {
 
         // Given
         val mockedObserver = createPopularTVShowsFeedObserver()
-        popularTVShowsViewModel.getPopularTvShowsLiveData()
+        popularTVShowsViewModel.getSearchMoviesLiveData()
             .observeForever(mockedObserver)
 
         every { fetchPopularTvShowUseCase.fetchMovies(any()) } returns
@@ -71,7 +71,7 @@ class PopularTVShowsViewModelTest {
     fun `given success state, when fetchMovies called, then update live data for success status`() {
         // Given
         val mockedObserver = createPopularTVShowsFeedObserver()
-        popularTVShowsViewModel.getPopularTvShowsLiveData()
+        popularTVShowsViewModel.getSearchMoviesLiveData()
             .observeForever(mockedObserver)
 
         every { fetchPopularTvShowUseCase.fetchMovies(any()) } returns
@@ -95,7 +95,7 @@ class PopularTVShowsViewModelTest {
     fun `given error state, when fetchMovies called, then update live data for error status`() {
         // Given
         val mockedObserver = createPopularTVShowsFeedObserver()
-        popularTVShowsViewModel.getPopularTvShowsLiveData()
+        popularTVShowsViewModel.getSearchMoviesLiveData()
             .observeForever(mockedObserver)
 
         every { fetchPopularTvShowUseCase.fetchMovies(any()) } returns
@@ -122,6 +122,7 @@ class PopularTVShowsViewModelTest {
         return SearchMovieItem(
             title = "Chernobyl",
             imageUrl = "/hlLXt2tOPT6RRnjiUmoxyG1LTFi.jpg",
+            imdbID = "112",
             releaseYear = "An unassuming mystery writer turned sleuth uses her professional insight to help solve real-life homicide cases."
         )
     }

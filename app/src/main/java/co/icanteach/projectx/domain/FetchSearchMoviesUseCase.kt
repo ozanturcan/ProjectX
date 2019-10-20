@@ -6,7 +6,7 @@ import co.icanteach.projectx.ui.populartvshows.model.SearchMovieItem
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class FetchPopularTvShowUseCase @Inject constructor(
+class FetchSearchMoviesUseCase @Inject constructor(
     private val repository: MoviesRepository,
     private val mapper: SearchMovieMapper
 ) {

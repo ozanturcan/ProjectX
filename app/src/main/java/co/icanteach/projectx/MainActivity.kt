@@ -2,6 +2,7 @@ package co.icanteach.projectx
 
 import android.os.Bundle
 import android.view.Menu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
@@ -13,7 +14,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.icanteach.projectx.common.ui.EndlessScrollListener
 import co.icanteach.projectx.common.ui.observeNonNull
-import co.icanteach.projectx.common.ui.runIfNull
 import co.icanteach.projectx.common.ui.withOutEmptyChar
 import co.icanteach.projectx.databinding.ActivityMainBinding
 import co.icanteach.projectx.ui.populartvshows.PopularTVShowsViewModel
@@ -50,13 +50,10 @@ class MainActivity : AppCompatActivity() {
         moviesViewModel =
             ViewModelProviders.of(this, viewModelProviderFactory).get(PopularTVShowsViewModel::class.java)
 
-        moviesViewModel.getPopularTvShowsLiveData().observeNonNull(this) {
+        moviesViewModel.getSearchMoviesLiveData().observeNonNull(this) {
             renderPopularTVShows(it)
         }
 
-        savedInstanceState.runIfNull {
-            fetchMovies("empty", FIRST_PAGE)
-        }
         initPopularTVShowsRecyclerView()
         initMaterialDialog()
     }
@@ -71,7 +68,16 @@ class MainActivity : AppCompatActivity() {
 
         mSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                fetchMovies(query, FIRST_PAGE)
+                if (query.length > 2) {
+                    tvShowsFeedAdapter.clearTvShows()
+                    moviesViewModel.currentQueryStringLiveData.value = query
+                    fetchMovies(query, FIRST_PAGE)
+
+                } else Toast.makeText(
+                    this@MainActivity,
+                    "Min searchable text length is 3",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return false
             }
 
@@ -89,7 +95,11 @@ class MainActivity : AppCompatActivity() {
             layoutManager = linearLayoutManager
             addOnScrollListener(object : EndlessScrollListener(linearLayoutManager) {
                 override fun onLoadMore(page: Int) {
-                    fetchMovies("empty", page)
+                    if (moviesViewModel.currentQueryStringLiveData.value.toString().length > 2)
+                        fetchMovies(
+                            moviesViewModel.currentQueryStringLiveData.value.toString(),
+                            page
+                        )
                 }
             })
         }
