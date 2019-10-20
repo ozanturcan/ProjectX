@@ -1,11 +1,11 @@
 package co.icanteach.projectx
 
 import co.icanteach.projectx.common.Status
-import co.icanteach.projectx.ui.populartvshows.SearchMovieFeedViewState
+import co.icanteach.projectx.ui.searchMovies.SearchMovieFeedViewState
 import com.google.common.truth.Truth
 import org.junit.Test
 
-class PopularTVShowsFeedViewStateTest {
+class SearchMoviesFeedViewStateTest {
 
     @Test
     fun `should return loading true when status is loading`() {

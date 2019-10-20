@@ -26,18 +26,18 @@ a simple app that contains some basic functionality. It connects to the Movies D
 .
 ViewModel and ViewStates classes should be tested.
 
-* [PopularTvShowsTestSuite](https://github.com/muratcanbur/ProjectX/blob/master/app/src/test/java/co/icanteach/projectx/PopularTvShowsTestSuite.kt)
+* [SearchMoviesTestSuite](https://github.com/muratcanbur/ProjectX/blob/master/app/src/test/java/co/icanteach/projectx/SearchMoviesTestSuite.kt)
 
 ### ViewModel
 need to make sure that the correct state changes occur at the right time during remote data request.
 
-* [PopularTVShowsViewModelTest](https://github.com/muratcanbur/ProjectX/blob/master/app/src/test/java/co/icanteach/projectx/PopularTVShowsViewModelTest.kt)
+* [SearchMoviesViewModelTest](https://github.com/muratcanbur/ProjectX/blob/master/app/src/test/java/co/icanteach/projectx/SearchMoviesViewModelTest.kt)
 
 ### ViewState 
 ViewStates are responsible for reporting changes to the UI.
 
-* [PopularTVShowsFeedItemViewStateTest](https://github.com/muratcanbur/ProjectX/blob/master/app/src/test/java/co/icanteach/projectx/PopularTVShowsFeedItemViewStateTest.kt)
-* [PopularTVShowsFeedViewStateTest](https://github.com/muratcanbur/ProjectX/blob/master/app/src/test/java/co/icanteach/projectx/PopularTVShowsFeedViewStateTest.kt)
+* [SearchMoviesFeedItemViewStateTest](https://github.com/muratcanbur/ProjectX/blob/master/app/src/test/java/co/icanteach/projectx/SearchMoviesFeedItemViewStateTest.kt)
+* [SearchMoviesFeedViewStateTest](https://github.com/muratcanbur/ProjectX/blob/master/app/src/test/java/co/icanteach/projectx/SearchMoviesFeedViewStateTest.kt)
 
 ## Blog posts about project
 * [A Sample Project for your Android Interview Assignment](https://medium.com/@muratcanbur/a-sample-project-for-your-android-interview-assignment-324783e0160f)

@@ -2,7 +2,7 @@ package co.icanteach.projectx.domain
 
 import co.icanteach.projectx.common.Resource
 import co.icanteach.projectx.data.feed.MoviesRepository
-import co.icanteach.projectx.ui.populartvshows.model.SearchMovieItem
+import co.icanteach.projectx.ui.searchMovies.model.SearchMovieItem
 import io.reactivex.Observable
 import javax.inject.Inject
 

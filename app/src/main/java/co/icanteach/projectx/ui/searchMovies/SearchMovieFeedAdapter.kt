@@ -1,11 +1,11 @@
-package co.icanteach.projectx.ui.populartvshows
+package co.icanteach.projectx.ui.searchMovies
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.icanteach.projectx.R
 import co.icanteach.projectx.common.ui.inflate
-import co.icanteach.projectx.databinding.ItemPopularTvShowsFeedBinding
-import co.icanteach.projectx.ui.populartvshows.model.SearchMovieItem
+import co.icanteach.projectx.databinding.ItemSearchMoviesFeedBinding
+import co.icanteach.projectx.ui.searchMovies.model.SearchMovieItem
 import javax.inject.Inject
 
 class SearchMovieFeedAdapter @Inject constructor() :
@@ -17,35 +17,36 @@ class SearchMovieFeedAdapter @Inject constructor() :
         parent: ViewGroup,
         viewType: Int
     ): SearchMoviesFeedItemViewHolder {
-        val itemBinding = parent.inflate<ItemPopularTvShowsFeedBinding>(R.layout.item_popular_tv_shows_feed, false)
+        val itemBinding =
+            parent.inflate<ItemSearchMoviesFeedBinding>(R.layout.item_search_movies_feed, false)
         return SearchMoviesFeedItemViewHolder(itemBinding)
     }
 
     override fun getItemCount(): Int = searchMovies.size
 
     override fun onBindViewHolder(holder: SearchMoviesFeedItemViewHolder, position: Int) {
-        holder.bind(getTvShow(position))
+        holder.bind(getMovie(position))
     }
 
-    private fun getTvShow(position: Int) = searchMovies[position]
+    private fun getMovie(position: Int) = searchMovies[position]
 
-    fun setTvShows(tvShows: List<SearchMovieItem>) {
+    fun setMovies(movies: List<SearchMovieItem>) {
         val beforeSize = searchMovies.size
-        searchMovies.addAll(tvShows)
-        notifyItemRangeInserted(beforeSize, tvShows.size)
+        searchMovies.addAll(movies)
+        notifyItemRangeInserted(beforeSize, movies.size)
     }
 
-    fun clearTvShows() {
+    fun clearMovies() {
         searchMovies.clear()
         notifyDataSetChanged()
     }
 
-    inner class SearchMoviesFeedItemViewHolder(private val binding: ItemPopularTvShowsFeedBinding) :
+    inner class SearchMoviesFeedItemViewHolder(private val binding: ItemSearchMoviesFeedBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(tvShow: SearchMovieItem) {
+        fun bind(movie: SearchMovieItem) {
             with(binding) {
-                viewState = SearchMoviesFeedItemViewState(tvShow)
+                viewState = SearchMoviesFeedItemViewState(movie)
                 executePendingBindings()
             }
         }

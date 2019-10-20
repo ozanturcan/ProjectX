@@ -1,14 +1,14 @@
-package co.icanteach.projectx.ui.populartvshows
+package co.icanteach.projectx.ui.searchMovies
 
 import co.icanteach.projectx.common.Status
-import co.icanteach.projectx.ui.populartvshows.model.SearchMovieItem
+import co.icanteach.projectx.ui.searchMovies.model.SearchMovieItem
 
 class SearchMovieFeedViewState(
     val status: Status,
     val error: Throwable? = null,
     val data: List<SearchMovieItem>? = null
 ) {
-    fun getPopularTvShows() = data ?: mutableListOf()
+    fun getSearchMovies() = data ?: mutableListOf()
 
     fun isLoading() = status == Status.LOADING
 

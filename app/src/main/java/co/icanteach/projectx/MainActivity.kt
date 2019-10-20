@@ -16,9 +16,9 @@ import co.icanteach.projectx.common.ui.EndlessScrollListener
 import co.icanteach.projectx.common.ui.observeNonNull
 import co.icanteach.projectx.common.ui.withOutEmptyChar
 import co.icanteach.projectx.databinding.ActivityMainBinding
-import co.icanteach.projectx.ui.populartvshows.PopularTVShowsViewModel
-import co.icanteach.projectx.ui.populartvshows.SearchMovieFeedAdapter
-import co.icanteach.projectx.ui.populartvshows.SearchMovieFeedViewState
+import co.icanteach.projectx.ui.searchMovies.SearchMovieFeedAdapter
+import co.icanteach.projectx.ui.searchMovies.SearchMovieFeedViewState
+import co.icanteach.projectx.ui.searchMovies.SearchMoviesViewModel
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
@@ -30,16 +30,15 @@ import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 
-
 class MainActivity : AppCompatActivity() {
 
     @Inject
     internal lateinit var viewModelProviderFactory: ViewModelProvider.Factory
 
     @Inject
-    internal lateinit var tvShowsFeedAdapter: SearchMovieFeedAdapter
+    internal lateinit var moviesFeedAdapter: SearchMovieFeedAdapter
 
-    private lateinit var moviesViewModel: PopularTVShowsViewModel
+    private lateinit var moviesViewModel: SearchMoviesViewModel
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,13 +47,14 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         moviesViewModel =
-            ViewModelProviders.of(this, viewModelProviderFactory).get(PopularTVShowsViewModel::class.java)
+            ViewModelProviders.of(this, viewModelProviderFactory)
+                .get(SearchMoviesViewModel::class.java)
 
         moviesViewModel.getSearchMoviesLiveData().observeNonNull(this) {
-            renderPopularTVShows(it)
+            renderSearchMovies(it)
         }
 
-        initPopularTVShowsRecyclerView()
+        initSearchMoviesRecyclerView()
         initMaterialDialog()
     }
 
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         mSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 if (query.length > 2) {
-                    tvShowsFeedAdapter.clearTvShows()
+                    moviesFeedAdapter.clearMovies()
                     moviesViewModel.currentQueryStringLiveData.value = query
                     fetchMovies(query, FIRST_PAGE)
 
@@ -88,10 +88,11 @@ class MainActivity : AppCompatActivity() {
 
         return super.onCreateOptionsMenu(menu)
     }
-    private fun initPopularTVShowsRecyclerView() {
+
+    private fun initSearchMoviesRecyclerView() {
         val linearLayoutManager = LinearLayoutManager(this)
         binding.recyclerView.apply {
-            adapter = tvShowsFeedAdapter
+            adapter = moviesFeedAdapter
             layoutManager = linearLayoutManager
             addOnScrollListener(object : EndlessScrollListener(linearLayoutManager) {
                 override fun onLoadMore(page: Int) {
@@ -105,12 +106,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun renderPopularTVShows(feedViewState: SearchMovieFeedViewState) {
+    private fun renderSearchMovies(feedViewState: SearchMovieFeedViewState) {
         with(binding) {
             viewState = feedViewState
             executePendingBindings()
         }
-        tvShowsFeedAdapter.setTvShows(feedViewState.getPopularTvShows())
+        moviesFeedAdapter.setMovies(feedViewState.getSearchMovies())
     }
 
     private fun fetchMovies(search: String, page: Int) {

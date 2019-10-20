@@ -1,4 +1,4 @@
-package co.icanteach.projectx.ui.populartvshows
+package co.icanteach.projectx.ui.searchMovies
 
 import co.icanteach.projectx.common.di.scope.ActivityScope
 import dagger.Module

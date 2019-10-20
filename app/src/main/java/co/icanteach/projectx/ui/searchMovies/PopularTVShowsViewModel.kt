@@ -1,4 +1,4 @@
-package co.icanteach.projectx.ui.populartvshows
+package co.icanteach.projectx.ui.searchMovies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,11 +6,11 @@ import co.icanteach.projectx.common.Resource
 import co.icanteach.projectx.common.RxAwareViewModel
 import co.icanteach.projectx.common.ui.plusAssign
 import co.icanteach.projectx.domain.FetchSearchMoviesUseCase
-import co.icanteach.projectx.ui.populartvshows.model.SearchMovieItem
+import co.icanteach.projectx.ui.searchMovies.model.SearchMovieItem
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class PopularTVShowsViewModel @Inject constructor(private val fetchSearchMoviesUseCase: FetchSearchMoviesUseCase) :
+class SearchMoviesViewModel @Inject constructor(private val fetchSearchMoviesUseCase: FetchSearchMoviesUseCase) :
     RxAwareViewModel() {
 
     private val searchMoviesLiveData = MutableLiveData<SearchMovieFeedViewState>()

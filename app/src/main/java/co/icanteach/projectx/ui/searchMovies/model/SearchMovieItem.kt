@@ -1,4 +1,4 @@
-package co.icanteach.projectx.ui.populartvshows.model
+package co.icanteach.projectx.ui.searchMovies.model
 
 class SearchMovieItem(
     val imageUrl: String?,
