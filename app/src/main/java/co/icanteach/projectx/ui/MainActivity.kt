@@ -143,6 +143,7 @@ class MainActivity : AppCompatActivity() {
         val btnCompare: AppCompatButton = customView.findViewById(R.id.btnCompare)
 
         btnCompare.setOnClickListener {
+            // tekrara dahil olmadıkları için loop içerisine sokmaya gerekyok
             val hashMap =
                 calculateConsecutiveCharacterList(etRepeatingString.text.toString().withOutEmptyChar())
             var result = etRepeatingString.text.toString()
@@ -162,26 +163,27 @@ class MainActivity : AppCompatActivity() {
         val repeatingMap: HashMap<Int, HashSet<String>> = hashMapOf()
 
         val length = repeatingString.length
-        // Find the maximum repeating character
-        // starting from repeatingString[i]
         var count = 0
+
+        //minumum döngü sayısı için while kullandım.
         while (count < length) {
             var currentCount = 1
             val stringBuilder = StringBuilder().append(repeatingString[count])
             for (j in count + 1 until length) {
                 if (repeatingString[count] != repeatingString[j])
                     break
+                // Eğer harfler ardaşık sıralı ise ardaşıklık sayısı kadar orjinal kelimeden harf okunmuş olur
                 currentCount++
                 stringBuilder.append(repeatingString[count])
             }
             if (repeatingMap.containsKey(currentCount)) {
-                count += currentCount
                 repeatingMap[currentCount]!!.add(stringBuilder.toString())
             } else {
-                count += currentCount
                 repeatingMap[currentCount] =
                     hashSetOf<String>().apply { add(stringBuilder.toString()) }
             }
+            // Bu ardakış harflerin sayısı döngü başındaki count değerine eklenir.
+            count += currentCount
         }
 
         println("println repeatingMap :" + repeatingMap.toList())
